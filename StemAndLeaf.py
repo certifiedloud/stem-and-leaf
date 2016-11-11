@@ -13,9 +13,10 @@ class StemAndLeafPlot:
         numDict = self.constructPlotDict()
         for i in numDict:
             numLength = len(str(i))
-            # Print the leaf, the buffer spacing, and a pipe
+            # Print the stem, the buffer spacing, and a pipe
             print("{}{} | ".format(i, " "*(maxDigits - numLength)), end="")
             for j in numDict[i]:
+                # Print all of the leaves for this stem
                 print("{} ".format(j), end="")
             print("")
 
@@ -39,7 +40,10 @@ class StemAndLeafPlot:
         return numDict
 
 def main():
-    numList = [100,1,29,3,3,5,6,7,7,7,7,8,8,9,9,10,10,14,15,15,15,15,15,20,21]
+    import random
+    numList = []
+    for i in range(100):
+        numList.append(random.randint(0,100))
     sal = StemAndLeafPlot(numList)
     sal.plot()
 
