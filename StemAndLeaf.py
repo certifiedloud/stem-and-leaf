@@ -14,7 +14,7 @@ class StemAndLeafPlot:
         for i in numDict:
             numLength = len(str(i))
             # Print the stem, the buffer spacing, and a pipe
-            print("{}{} | ".format(i, " "*(maxDigits - numLength)), end="")
+            print("{}{}| ".format(i, " "*(maxDigits - numLength)), end="")
             for j in numDict[i]:
                 # Print all of the leaves for this stem
                 print("{} ".format(j), end="")
