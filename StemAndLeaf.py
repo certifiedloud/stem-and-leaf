@@ -3,9 +3,11 @@ A simple stem and leaf plot class
 """
 
 class StemAndLeafPlot:
-    def __init__(self, numList):
+    def __init__(self, numList, colorizeRule=None):
         self.numList = sorted(numList)
-
+        self.colorizeRule = colorizeRule
+        self.COLOR = "\033[93m"
+        self.ENDCOLOR = "\033[0m"
     def plot(self):
         # The number of digits in the biggest number
         maxDigits = len(str(self.numList[-1]))
@@ -14,13 +16,20 @@ class StemAndLeafPlot:
         for i in numDict:
             numLength = len(str(i))
             # Print the stem, the buffer spacing, and a pipe
-            print("{}{}| ".format(i, " "*(maxDigits - numLength)), end="")
+            print("{}| ".format(i, " "*(maxDigits - numLength)), end="")
             for j in numDict[i]:
                 # Print all of the leaves for this stem
-                print("{} ".format(j), end="")
+                print("{} ".format(self.colorizeNum(j)), end="")
             print("")
 
         print("\nKey: 1 | 2 = 12")
+
+    def colorizeNum(self, num):
+        execString = str(num) + self.colorizeRule
+        if eval(execString):
+            return "{}{}{}".format(self.COLOR, num, self.ENDCOLOR)
+        else: 
+            return num
 
     def constructPlotDict(self):
         numDict = {}
@@ -44,7 +53,7 @@ def main():
     numList = []
     for i in range(100):
         numList.append(random.randint(0,100))
-    sal = StemAndLeafPlot(numList)
+    sal = StemAndLeafPlot(numList, colorizeRule=" % 2 == 0")
     sal.plot()
 
 if __name__ == "__main__":
