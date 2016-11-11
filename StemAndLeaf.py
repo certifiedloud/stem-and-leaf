@@ -7,9 +7,14 @@ class StemAndLeafPlot:
         self.numList = sorted(numList)
 
     def plot(self):
+        # The number of digits in the biggest number
+        maxDigits = len(str(self.numList[-1]))
+
         numDict = self.constructPlotDict()
         for i in numDict:
-            print("{} | ".format(i), end="")
+            numLength = len(str(i))
+            # Print the leaf, the buffer spacing, and a pipe
+            print("{}{} | ".format(i, " "*(maxDigits - numLength)), end="")
             for j in numDict[i]:
                 print("{} ".format(j), end="")
             print("")
@@ -34,7 +39,7 @@ class StemAndLeafPlot:
         return numDict
 
 def main():
-    numList = [1,1,2,3,3,5,6,7,7,7,7,8,8,9,9,10,10,14,15,15,15,15,15,20,21]
+    numList = [100,1,29,3,3,5,6,7,7,7,7,8,8,9,9,10,10,14,15,15,15,15,15,20,21]
     sal = StemAndLeafPlot(numList)
     sal.plot()
 
